@@ -33,6 +33,20 @@ const tamilText: Record<
   },
 }
 
+const auroraRoutes = [
+  '/dashboard',
+  '/recommendations',
+  '/marketing',
+  '/campaign',
+  '/campaigns',
+]
+
+function isAuroraRoute(pathname: string) {
+  return auroraRoutes.some(
+    (route) => pathname === route || pathname.startsWith(route + '/'),
+  )
+}
+
 export function Topbar({
   onMenuClick,
 }: {
@@ -40,7 +54,7 @@ export function Topbar({
 }) {
   const pathname = usePathname()
   const { language } = useLanguage()
-  const dashboardMode = pathname === '/dashboard'
+  const dashboardMode = isAuroraRoute(pathname)
 
   const current = navItems.find(
     (item) =>
@@ -61,19 +75,26 @@ export function Topbar({
   return (
     <header
       className={cn(
-        'sticky top-0 z-20 flex h-16 items-center gap-3 border-b px-4 backdrop-blur-[22px] md:px-6',
+        'sticky top-0 z-20 flex h-16 items-center gap-3 border-b px-4 backdrop-blur-[26px] md:px-6',
         dashboardMode
-          ? 'border-white/10 bg-[#07111f]/72 text-white shadow-[0_10px_35px_rgba(0,0,0,0.14)]'
+          ? 'border-white/10 bg-[#050816]/72 text-white shadow-[0_12px_40px_rgba(0,0,0,0.24)]'
           : 'border-border bg-background/80',
       )}
     >
+      {dashboardMode ? (
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -left-20 -top-24 h-52 w-72 rounded-full bg-cyan-400/10 blur-[90px]" />
+          <div className="absolute right-1/3 -top-24 h-52 w-72 rounded-full bg-violet-500/10 blur-[90px]" />
+        </div>
+      ) : null}
+
       <button
         onClick={onMenuClick}
         aria-label={language === 'ta' ? 'மெனுவை திறக்கவும்' : 'Open menu'}
         className={cn(
-          'flex size-9 items-center justify-center rounded-lg lg:hidden',
+          'flex size-9 items-center justify-center rounded-xl lg:hidden',
           dashboardMode
-            ? 'text-slate-400 hover:bg-white/[0.08] hover:text-white'
+            ? 'border border-white/10 bg-white/[0.06] text-slate-300 hover:bg-white/[0.10] hover:text-white'
             : 'text-muted-foreground hover:bg-muted hover:text-foreground',
         )}
       >
@@ -105,11 +126,11 @@ export function Topbar({
           className={cn(
             'hidden items-center gap-2 rounded-xl border px-3 py-2 text-sm md:flex',
             dashboardMode
-              ? 'border-white/10 bg-white/[0.06] text-slate-300 backdrop-blur-xl'
+              ? 'border-white/10 bg-white/[0.065] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl focus-within:border-cyan-300/30 focus-within:bg-white/[0.08]'
               : 'border-border bg-card text-muted-foreground',
           )}
         >
-          <Search className="size-4" />
+          <Search className={cn('size-4', dashboardMode && 'text-cyan-300')} />
 
           <input
             className={cn(
@@ -132,7 +153,7 @@ export function Topbar({
         <div
           className={cn(
             dashboardMode &&
-              'rounded-xl border border-white/10 bg-white/[0.06] backdrop-blur-xl [&_button]:border-0 [&_button]:bg-transparent [&_button]:text-slate-200',
+              'rounded-xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-2xl [&_button]:border-0 [&_button]:bg-transparent [&_button]:text-slate-200 [&_button:hover]:bg-white/[0.06]',
           )}
         >
           <LanguageToggle />
@@ -141,17 +162,19 @@ export function Topbar({
         <button
           aria-label={language === 'ta' ? 'அறிவிப்புகள்' : 'Notifications'}
           className={cn(
-            'relative flex size-9 items-center justify-center rounded-xl border',
+            'relative flex size-9 items-center justify-center rounded-xl border transition-colors',
             dashboardMode
-              ? 'border-white/10 bg-white/[0.06] text-slate-300 backdrop-blur-xl hover:bg-white/[0.10] hover:text-white'
+              ? 'border-white/10 bg-white/[0.06] text-slate-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-2xl hover:border-cyan-300/20 hover:bg-white/[0.10] hover:text-white'
               : 'border-border bg-card text-muted-foreground hover:text-foreground',
           )}
         >
           <Bell className="size-[1.1rem]" />
           <span
             className={cn(
-              'absolute right-2 top-2 size-2 rounded-full bg-primary ring-2',
-              dashboardMode ? 'ring-[#07111f]' : 'ring-card',
+              'absolute right-2 top-2 size-2 rounded-full ring-2',
+              dashboardMode
+                ? 'bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.85)] ring-[#07111f]'
+                : 'bg-primary ring-card',
             )}
           />
         </button>
@@ -160,7 +183,7 @@ export function Topbar({
           className={cn(
             'flex items-center gap-2.5 rounded-xl border py-1 pl-1 pr-3',
             dashboardMode
-              ? 'border-white/10 bg-white/[0.06] backdrop-blur-xl'
+              ? 'border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-2xl'
               : 'border-border bg-card',
           )}
         >
@@ -168,7 +191,7 @@ export function Topbar({
             className={cn(
               'flex size-8 items-center justify-center rounded-lg font-display text-sm font-bold',
               dashboardMode
-                ? 'bg-gradient-to-br from-blue-500/80 to-violet-500/80 text-white'
+                ? 'bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 text-white shadow-[0_6px_18px_rgba(59,130,246,0.28)]'
                 : 'bg-secondary text-secondary-foreground',
             )}
           >
