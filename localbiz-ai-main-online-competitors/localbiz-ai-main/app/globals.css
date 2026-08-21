@@ -200,6 +200,73 @@
     box-shadow: 0 18px 55px -28px color-mix(in oklch, var(--primary) 50%, transparent);
   }
 
+  .dashboard-glass {
+    isolation: isolate;
+    background:
+      linear-gradient(135deg, color-mix(in oklch, var(--primary) 10%, transparent), transparent 42%),
+      linear-gradient(315deg, color-mix(in oklch, var(--chart-4) 10%, transparent), transparent 45%),
+      color-mix(in oklch, var(--background) 56%, transparent);
+    border: 1px solid color-mix(in oklch, white 62%, var(--border));
+    backdrop-filter: blur(28px) saturate(150%);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    box-shadow:
+      0 30px 80px -42px color-mix(in oklch, var(--primary) 48%, transparent),
+      inset 0 1px 0 color-mix(in oklch, white 75%, transparent);
+  }
+
+  .dashboard-glass [data-slot='card'] {
+    background: color-mix(in oklch, white 58%, transparent);
+    border-color: color-mix(in oklch, white 72%, var(--border));
+    backdrop-filter: blur(24px) saturate(165%);
+    -webkit-backdrop-filter: blur(24px) saturate(165%);
+    box-shadow:
+      0 18px 50px -32px color-mix(in oklch, var(--primary) 42%, transparent),
+      inset 0 1px 0 color-mix(in oklch, white 82%, transparent);
+  }
+
+  .dark .dashboard-glass [data-slot='card'] {
+    background: color-mix(in oklch, var(--card) 52%, transparent);
+    border-color: color-mix(in oklch, white 14%, transparent);
+  }
+
+  .dashboard-glass table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .dashboard-glass tbody tr {
+    transition: background 160ms ease, transform 160ms ease;
+  }
+
+  .dashboard-glass tbody tr:hover {
+    background: color-mix(in oklch, var(--primary) 7%, transparent);
+  }
+
+  .dashboard-orb {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 9999px;
+    filter: blur(52px);
+    opacity: 0.55;
+  }
+
+  .dashboard-orb-one {
+    width: 260px;
+    height: 260px;
+    top: -70px;
+    right: 8%;
+    background: color-mix(in oklch, var(--primary) 30%, transparent);
+  }
+
+  .dashboard-orb-two {
+    width: 300px;
+    height: 300px;
+    bottom: 8%;
+    left: -110px;
+    background: color-mix(in oklch, var(--chart-4) 24%, transparent);
+  }
+
   @keyframes fade-in-up {
     from {
       opacity: 0;
