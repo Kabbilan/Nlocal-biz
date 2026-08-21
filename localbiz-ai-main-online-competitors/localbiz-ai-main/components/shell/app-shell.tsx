@@ -12,6 +12,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const auroraMode = [
     '/dashboard',
     '/analyze',
+    '/local-deals',
     '/competitors',
     '/analytics',
     '/recommendations',
