@@ -54,10 +54,10 @@ export default async function RecommendationsPage() {
             </span>
             <div className="text-sm">
               <p className="font-medium text-white">
-                {highCount} action{highCount > 1 ? "s" : ""} need your attention today
+                {highCount} action{highCount > 1 ? "s" : ""} {highCount === 1 ? "needs" : "need"} your attention today
               </p>
               <p className="text-slate-300">
-                These are time-sensitive because rain is forecast in the next few days.
+                {highCount === 1 ? "This action is" : "These actions are"} time-sensitive because rain is forecast in the next few days.
               </p>
             </div>
           </div>
