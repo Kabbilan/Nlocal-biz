@@ -11,6 +11,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const auroraMode = [
     '/dashboard',
+    '/analyze',
+    '/competitors',
+    '/analytics',
     '/recommendations',
     '/marketing',
     '/campaign',
@@ -29,7 +32,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <MobileSidebar open={mobileOpen} onClose={() => setMobileOpen(false)} />
       <div className="lg:pl-64">
         <Topbar onMenuClick={() => setMobileOpen(true)} />
-        <main className="mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8">
+        <main
+          className={
+            auroraMode
+              ? 'aurora-main mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8'
+              : 'mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8'
+          }
+        >
           {children}
         </main>
       </div>
