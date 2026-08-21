@@ -35,6 +35,9 @@ const tamilText: Record<
 
 const auroraRoutes = [
   '/dashboard',
+  '/analyze',
+  '/competitors',
+  '/analytics',
   '/recommendations',
   '/marketing',
   '/campaign',
