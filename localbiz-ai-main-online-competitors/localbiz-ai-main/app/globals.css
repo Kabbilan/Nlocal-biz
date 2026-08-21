@@ -135,12 +135,71 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    min-height: 100%;
+    background: var(--background);
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 10% 10%, color-mix(in oklch, var(--primary) 22%, transparent) 0, transparent 34%),
+      radial-gradient(circle at 88% 14%, color-mix(in oklch, var(--chart-4) 18%, transparent) 0, transparent 30%),
+      radial-gradient(circle at 55% 90%, color-mix(in oklch, var(--chart-5) 12%, transparent) 0, transparent 32%),
+      var(--background);
+    background-attachment: fixed;
+  }
+
+  [data-slot='card'] {
+    background: color-mix(in oklch, var(--card) 72%, transparent);
+    border-color: color-mix(in oklch, var(--border) 70%, transparent);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow:
+      0 18px 45px -30px color-mix(in oklch, var(--foreground) 35%, transparent),
+      inset 0 1px 0 color-mix(in oklch, white 55%, transparent);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  [data-slot='card']:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklch, var(--primary) 28%, var(--border));
+    box-shadow:
+      0 24px 60px -34px color-mix(in oklch, var(--primary) 42%, transparent),
+      inset 0 1px 0 color-mix(in oklch, white 60%, transparent);
+  }
+
+  header,
+  aside {
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
   }
 }
 
 @layer utilities {
+  .glass-panel {
+    background: color-mix(in oklch, var(--card) 68%, transparent);
+    border: 1px solid color-mix(in oklch, var(--border) 72%, transparent);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow:
+      0 20px 55px -34px color-mix(in oklch, var(--primary) 38%, transparent),
+      inset 0 1px 0 color-mix(in oklch, white 52%, transparent);
+  }
+
+  .glass-soft {
+    background: color-mix(in oklch, var(--muted) 58%, transparent);
+    border-color: color-mix(in oklch, var(--border) 65%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .glass-glow {
+    box-shadow: 0 18px 55px -28px color-mix(in oklch, var(--primary) 50%, transparent);
+  }
+
   @keyframes fade-in-up {
     from {
       opacity: 0;
@@ -151,6 +210,7 @@
       transform: translateY(0);
     }
   }
+
   .animate-fade-in-up {
     animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
