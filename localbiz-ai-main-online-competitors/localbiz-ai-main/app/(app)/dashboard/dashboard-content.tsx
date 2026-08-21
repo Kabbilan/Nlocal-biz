@@ -118,6 +118,7 @@ export default function DashboardContent({
                     src={featured.image}
                     alt={featured.name}
                     fill
+                    loading="eager"
                     className="object-cover"
                     sizes="160px"
                   />
