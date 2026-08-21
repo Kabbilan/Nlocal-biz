@@ -10,11 +10,17 @@ export default async function DashboardPage() {
   ])
 
   return (
-    <DashboardContent
-      stats={stats}
-      products={products}
-      featured={featured}
-      recommendations={recommendations}
-    />
+    <div className="dashboard-glass relative overflow-hidden rounded-[2rem] p-4 sm:p-6">
+      <div className="dashboard-orb dashboard-orb-one" />
+      <div className="dashboard-orb dashboard-orb-two" />
+      <div className="relative z-10">
+        <DashboardContent
+          stats={stats}
+          products={products}
+          featured={featured}
+          recommendations={recommendations}
+        />
+      </div>
+    </div>
   )
 }

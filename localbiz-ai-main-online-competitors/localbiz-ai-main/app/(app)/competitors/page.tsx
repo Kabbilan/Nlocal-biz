@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { DemandBadge } from "@/components/demand-badge"
 import { CompetitorChart } from "@/components/charts/competitor-chart"
 import { api, formatCurrency } from "@/services/api"
 import { Globe2, TrendingDown, ArrowRight, Star, Truck } from "lucide-react"
@@ -87,20 +86,20 @@ export default async function CompetitorsPage() {
               <span className="font-semibold text-destructive">
                 {formatCurrency(yourPrice - lowest)} more expensive
               </span>{" "}
-                than the cheapest delivered listing online.
+              than the cheapest delivered listing online.
             </p>
             <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
               <p className="mb-1 text-xs font-medium uppercase tracking-wide text-primary">Recommended move</p>
               <p className="text-foreground">
                 Set your price to{" "}
-                 <span className="font-semibold">{formatCurrency(recommended)}</span> to stay below the delivered
-                 online market floor while keeping a{" "}
+                <span className="font-semibold">{formatCurrency(recommended)}</span> to stay below the delivered
+                online market floor while keeping a{" "}
                 <span className="font-semibold">{formatCurrency(recommended - analysis.cost)}</span> margin per unit.
               </p>
             </div>
             <p className="text-muted-foreground">
-               Matching the online market floor on listed price while offering local availability can make your
-               product the faster, more convenient choice for price-conscious shoppers.
+              Matching the online market floor on listed price while offering local availability can make your
+              product the faster, more convenient choice for price-conscious shoppers.
             </p>
           </CardContent>
         </Card>
@@ -108,26 +107,26 @@ export default async function CompetitorsPage() {
 
       <Card>
         <CardHeader>
-           <CardTitle>Online listings</CardTitle>
-           <CardDescription>Sorted by delivered price, with seller and delivery signals</CardDescription>
+          <CardTitle>Online listings</CardTitle>
+          <CardDescription>Sorted by delivered price, with seller and delivery signals</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-3">
           {[...prices]
-             .sort((a, b) => (a.price + a.shipping) - (b.price + b.shipping))
+            .sort((a, b) => (a.price + a.shipping) - (b.price + b.shipping))
             .map((p) => {
-              const isCheapest = p.price === lowest
+              const isCheapest = p.price + p.shipping === lowest
               return (
                 <div
-                   key={`${p.platform}-${p.seller}`}
+                  key={`${p.platform}-${p.seller}`}
                   className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-muted">
-                       <Globe2 className="size-5 text-muted-foreground" />
+                      <Globe2 className="size-5 text-muted-foreground" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                         <span className="font-medium">{p.platform}</span>
+                        <span className="font-medium">{p.platform}</span>
                         {isCheapest && (
                           <Badge variant="secondary" className="text-xs">
                             Cheapest
@@ -149,13 +148,11 @@ export default async function CompetitorsPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-right">
-                      <span className="font-sans text-xl font-semibold">{formatCurrency(p.price + p.shipping)}</span>
-                      <p className="text-xs text-muted-foreground">
-                        {formatCurrency(p.price)} +{" "}
-                        {p.shipping === 0 ? "free delivery" : `${formatCurrency(p.shipping)} delivery`}
-                      </p>
-                    </div>
+                    <span className="font-sans text-xl font-semibold">{formatCurrency(p.price + p.shipping)}</span>
+                    <p className="text-xs text-muted-foreground">
+                      {formatCurrency(p.price)} +{" "}
+                      {p.shipping === 0 ? "free delivery" : `${formatCurrency(p.shipping)} delivery`}
+                    </p>
                   </div>
                 </div>
               )
