@@ -84,10 +84,10 @@ export default function LandingPage() {
             <a href="#pricing" className="hover:text-foreground">Pricing</a>
           </nav>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="lg" render={<Link href="/dashboard" />}>
+            <Button variant="ghost" size="lg" nativeButton={false} render={<Link href="/dashboard" />}>
               Sign in
             </Button>
-            <Button size="lg" render={<Link href="/dashboard" />}>
+            <Button size="lg" nativeButton={false} render={<Link href="/dashboard" />}>
               Open dashboard
             </Button>
           </div>
@@ -110,7 +110,7 @@ export default function LandingPage() {
               right price, competitor insights, and ready-to-share marketing — in plain language.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button size="lg" className="h-11 px-5 text-[0.95rem]" render={<Link href="/dashboard" />}>
+              <Button size="lg" className="h-11 px-5 text-[0.95rem]" nativeButton={false} render={<Link href="/dashboard" />}>
                 Try the live demo
                 <ArrowRight />
               </Button>
@@ -118,6 +118,7 @@ export default function LandingPage() {
                 variant="outline"
                 size="lg"
                 className="h-11 px-5 text-[0.95rem]"
+                nativeButton={false}
                 render={<Link href="/analyze" />}
               >
                 Analyze a product
@@ -227,6 +228,7 @@ export default function LandingPage() {
               size="lg"
               variant="secondary"
               className="mt-8 h-11 px-6 text-[0.95rem]"
+              nativeButton={false}
               render={<Link href="/dashboard" />}
             >
               Open the dashboard
