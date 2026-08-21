@@ -28,15 +28,15 @@ export function StatCard({
   const Icon = iconMap[stat.id as keyof typeof iconMap]
 
   return (
-    <Card className="group relative overflow-hidden border-white/35 bg-white/55 p-5 shadow-[0_12px_35px_rgba(67,56,202,0.10)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-[0_18px_45px_rgba(67,56,202,0.18)] dark:border-white/10 dark:bg-white/[0.06]">
-      <div className="pointer-events-none absolute -right-10 -top-10 size-28 rounded-full bg-primary/12 blur-3xl transition-opacity group-hover:opacity-100" />
+    <Card className="group relative overflow-hidden !border-white/[0.16] !bg-white/[0.07] p-5 text-white backdrop-blur-[22px] shadow-[0_20px_55px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:-translate-y-1 hover:!border-cyan-300/25 hover:shadow-[0_24px_65px_rgba(34,211,238,0.12)]">
+      <div className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-blue-500/20 blur-3xl transition-all duration-500 group-hover:bg-cyan-400/25" />
+      <div className="pointer-events-none absolute -bottom-14 -left-10 size-28 rounded-full bg-violet-500/15 blur-3xl" />
+
       <div className="relative flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-sm font-medium text-muted-foreground">
-            {stat.label}
-          </p>
+          <p className="text-sm font-medium text-slate-300">{stat.label}</p>
 
-          <p className="mt-2 bg-gradient-to-r from-foreground to-primary bg-clip-text font-display text-3xl font-bold tracking-tight text-transparent">
+          <p className="mt-2 bg-gradient-to-r from-white via-blue-100 to-cyan-300 bg-clip-text font-display text-3xl font-bold tracking-tight text-transparent">
             {stat.value}
           </p>
         </div>
@@ -44,10 +44,10 @@ export function StatCard({
         {Icon ? (
           <span
             className={cn(
-              'flex size-11 shrink-0 items-center justify-center rounded-2xl border shadow-sm backdrop-blur-xl',
+              'flex size-11 shrink-0 items-center justify-center rounded-2xl border backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]',
               accent
-                ? 'border-primary/20 bg-primary/90 text-primary-foreground shadow-primary/20'
-                : 'border-white/40 bg-white/60 text-primary dark:border-white/10 dark:bg-white/10',
+                ? 'border-violet-300/25 bg-gradient-to-br from-blue-500/80 to-violet-500/80 text-white shadow-[0_10px_30px_rgba(99,102,241,0.28)]'
+                : 'border-white/15 bg-white/[0.09] text-cyan-200',
             )}
           >
             <Icon className="size-5" />
@@ -60,8 +60,8 @@ export function StatCard({
           className={cn(
             'inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold backdrop-blur-md',
             positive
-              ? 'border-success/20 bg-success/10 text-success'
-              : 'border-destructive/20 bg-destructive/10 text-destructive',
+              ? 'border-emerald-300/20 bg-emerald-400/10 text-emerald-300'
+              : 'border-rose-300/20 bg-rose-400/10 text-rose-300',
           )}
         >
           {positive ? (
@@ -73,9 +73,7 @@ export function StatCard({
           {Math.abs(stat.change)}%
         </span>
 
-        <span className="truncate text-muted-foreground">
-          {stat.hint}
-        </span>
+        <span className="truncate text-slate-400">{stat.hint}</span>
       </div>
     </Card>
   )
