@@ -17,6 +17,9 @@ const tamilLabels: Record<string, string> = {
 
 const auroraRoutes = [
   '/dashboard',
+  '/analyze',
+  '/competitors',
+  '/analytics',
   '/recommendations',
   '/marketing',
   '/campaign',
