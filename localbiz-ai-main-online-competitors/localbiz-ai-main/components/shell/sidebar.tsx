@@ -10,14 +10,22 @@ import { useLanguage } from '@/components/language-provider'
 const tamilLabels: Record<string, string> = {
   Dashboard: 'முகப்பு',
   Analyze: 'ஆய்வு',
+  'Analyze Product': 'பொருள் ஆய்வு',
+  'Nearby Best Price': 'அருகிலுள்ள சிறந்த விலை',
   Recommendations: 'பரிந்துரைகள்',
+  'AI Recommendation': 'AI பரிந்துரை',
   Marketing: 'மார்க்கெட்டிங்',
+  'Marketing Studio': 'மார்க்கெட்டிங் ஸ்டுடியோ',
   Campaigns: 'பிரச்சாரங்கள்',
+  'Campaign Planner': 'பிரச்சார திட்டம்',
+  Analytics: 'பகுப்பாய்வு',
+  'Competitor Intel': 'போட்டியாளர் தகவல்',
 }
 
 const auroraRoutes = [
   '/dashboard',
   '/analyze',
+  '/local-deals',
   '/competitors',
   '/analytics',
   '/recommendations',
