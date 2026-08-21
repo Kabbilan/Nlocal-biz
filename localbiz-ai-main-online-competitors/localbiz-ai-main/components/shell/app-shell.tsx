@@ -8,13 +8,20 @@ import { Topbar } from './topbar'
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
-  const dashboardMode = pathname === '/dashboard'
+
+  const auroraMode = [
+    '/dashboard',
+    '/recommendations',
+    '/marketing',
+    '/campaign',
+    '/campaigns',
+  ].some((route) => pathname === route || pathname.startsWith(route + '/'))
 
   return (
     <div
       className={
-        dashboardMode
-          ? 'min-h-screen bg-[#050b16]'
+        auroraMode
+          ? 'min-h-screen bg-[#050816] text-slate-100'
           : 'min-h-screen bg-background'
       }
     >
@@ -22,13 +29,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <MobileSidebar open={mobileOpen} onClose={() => setMobileOpen(false)} />
       <div className="lg:pl-64">
         <Topbar onMenuClick={() => setMobileOpen(true)} />
-        <main
-          className={
-            dashboardMode
-              ? 'mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8'
-              : 'mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8'
-          }
-        >
+        <main className="mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8">
           {children}
         </main>
       </div>
