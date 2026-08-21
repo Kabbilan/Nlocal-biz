@@ -6,6 +6,7 @@ import {
   Megaphone,
   CalendarClock,
   ChartColumn,
+  MapPinned,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -28,6 +29,12 @@ export const navItems: NavItem[] = [
     href: '/analyze',
     icon: Sparkles,
     description: 'Let AI study a product',
+  },
+  {
+    label: 'Nearby Best Price',
+    href: '/local-deals',
+    icon: MapPinned,
+    description: 'Find lower prices at nearby stores',
   },
   {
     label: 'Competitor Intel',
