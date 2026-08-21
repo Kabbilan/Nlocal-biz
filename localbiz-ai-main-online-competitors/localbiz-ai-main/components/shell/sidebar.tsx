@@ -15,6 +15,20 @@ const tamilLabels: Record<string, string> = {
   Campaigns: 'பிரச்சாரங்கள்',
 }
 
+const auroraRoutes = [
+  '/dashboard',
+  '/recommendations',
+  '/marketing',
+  '/campaign',
+  '/campaigns',
+]
+
+function isAuroraRoute(pathname: string) {
+  return auroraRoutes.some(
+    (route) => pathname === route || pathname.startsWith(route + '/'),
+  )
+}
+
 function BrandMark({ dashboardMode = false }: { dashboardMode?: boolean }) {
   const { language } = useLanguage()
 
@@ -24,7 +38,7 @@ function BrandMark({ dashboardMode = false }: { dashboardMode?: boolean }) {
         className={cn(
           'flex size-9 items-center justify-center rounded-xl text-primary-foreground shadow-sm',
           dashboardMode
-            ? 'border border-blue-300/20 bg-gradient-to-br from-blue-500 to-violet-500 shadow-[0_8px_24px_rgba(59,130,246,0.28)]'
+            ? 'border border-cyan-300/20 bg-gradient-to-br from-cyan-400 via-blue-500 to-violet-500 shadow-[0_8px_28px_rgba(34,211,238,0.24)]'
             : 'bg-primary',
         )}
       >
@@ -59,7 +73,7 @@ function BrandMark({ dashboardMode = false }: { dashboardMode?: boolean }) {
 export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname()
   const { language } = useLanguage()
-  const dashboardMode = pathname === '/dashboard'
+  const dashboardMode = isAuroraRoute(pathname)
 
   return (
     <nav className="flex flex-1 flex-col gap-1 px-3" aria-label="Main">
@@ -82,10 +96,10 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
             onClick={onNavigate}
             aria-current={active ? 'page' : undefined}
             className={cn(
-              'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all',
+              'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200',
               dashboardMode
                 ? active
-                  ? 'border border-blue-300/20 bg-white/[0.10] text-white shadow-[0_8px_26px_rgba(59,130,246,0.10)] backdrop-blur-xl'
+                  ? 'border border-cyan-300/20 bg-gradient-to-r from-cyan-400/[0.13] via-blue-500/[0.12] to-violet-500/[0.13] text-white shadow-[0_8px_28px_rgba(34,211,238,0.10)] backdrop-blur-xl'
                   : 'text-slate-400 hover:bg-white/[0.06] hover:text-white'
                 : active
                   ? 'bg-sidebar-accent text-sidebar-accent-foreground'
@@ -94,10 +108,10 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
           >
             <Icon
               className={cn(
-                'size-[1.15rem] shrink-0',
+                'size-[1.15rem] shrink-0 transition-colors',
                 dashboardMode
                   ? active
-                    ? 'text-cyan-300'
+                    ? 'text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,0.45)]'
                     : 'text-slate-500 group-hover:text-cyan-200'
                   : active
                     ? 'text-primary'
@@ -116,25 +130,26 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
 export function DesktopSidebar() {
   const { language } = useLanguage()
   const pathname = usePathname()
-  const dashboardMode = pathname === '/dashboard'
+  const dashboardMode = isAuroraRoute(pathname)
 
   return (
     <aside
       className={cn(
         'fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r lg:flex',
         dashboardMode
-          ? 'border-white/10 bg-[#07111f]/80 text-white backdrop-blur-[24px] shadow-[12px_0_45px_rgba(0,0,0,0.18)]'
+          ? 'overflow-hidden border-white/10 bg-[#050816]/80 text-white backdrop-blur-[28px] shadow-[12px_0_55px_rgba(0,0,0,0.28)]'
           : 'border-sidebar-border bg-sidebar',
       )}
     >
       {dashboardMode ? (
         <>
-          <div className="pointer-events-none absolute -left-24 top-12 h-72 w-72 rounded-full bg-blue-500/15 blur-[100px]" />
-          <div className="pointer-events-none absolute bottom-10 right-0 h-64 w-64 rounded-full bg-violet-500/10 blur-[100px]" />
+          <div className="pointer-events-none absolute -left-28 -top-12 h-80 w-80 rounded-full bg-cyan-400/15 blur-[110px]" />
+          <div className="pointer-events-none absolute left-10 top-1/3 h-72 w-72 rounded-full bg-blue-500/12 blur-[115px]" />
+          <div className="pointer-events-none absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-violet-500/14 blur-[120px]" />
         </>
       ) : null}
 
-      <div className="relative flex h-16 items-center px-6">
+      <div className="relative flex h-16 items-center border-b border-white/[0.06] px-6">
         <BrandMark dashboardMode={dashboardMode} />
       </div>
 
@@ -144,9 +159,9 @@ export function DesktopSidebar() {
 
       <div
         className={cn(
-          'relative m-3 rounded-xl border p-4',
+          'relative m-3 rounded-2xl border p-4',
           dashboardMode
-            ? 'border-white/10 bg-white/[0.06] backdrop-blur-xl'
+            ? 'border-white/10 bg-white/[0.055] shadow-[0_14px_35px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl'
             : 'border-border bg-muted/50',
         )}
       >
@@ -182,7 +197,7 @@ export function MobileSidebar({
   onClose: () => void
 }) {
   const pathname = usePathname()
-  const dashboardMode = pathname === '/dashboard'
+  const dashboardMode = isAuroraRoute(pathname)
 
   return (
     <div
@@ -195,7 +210,7 @@ export function MobileSidebar({
       <div
         className={cn(
           'absolute inset-0 transition-opacity',
-          dashboardMode ? 'bg-black/60' : 'bg-foreground/40',
+          dashboardMode ? 'bg-black/65 backdrop-blur-sm' : 'bg-foreground/40',
           open ? 'opacity-100' : 'opacity-0',
         )}
         onClick={onClose}
@@ -205,12 +220,12 @@ export function MobileSidebar({
         className={cn(
           'absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col shadow-xl transition-transform duration-300',
           dashboardMode
-            ? 'border-r border-white/10 bg-[#07111f]/92 text-white backdrop-blur-[24px]'
+            ? 'border-r border-white/10 bg-[#050816]/92 text-white backdrop-blur-[28px]'
             : 'bg-sidebar',
           open ? 'translate-x-0' : '-translate-x-full',
         )}
       >
-        <div className="flex h-16 items-center justify-between px-6">
+        <div className="flex h-16 items-center justify-between border-b border-white/[0.06] px-6">
           <BrandMark dashboardMode={dashboardMode} />
 
           <button
